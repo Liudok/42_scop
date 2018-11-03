@@ -39,6 +39,7 @@ int obj_parser(char *file_name, t_scop *scop)
 {
 	int fd;
 	char	**ar;
+	t_sdl s;
 
 	count_lines(file_name, scop);
 	get_data(file_name, scop);
@@ -52,8 +53,11 @@ int obj_parser(char *file_name, t_scop *scop)
 		ft_error(MES3);
 
 	printf("ar13 %s\n", ar[13]);
+	if (!sdl_init_everything(&s))
+		ft_error("Failed SDL initialization");
 
 	printf("PROVERKA %s\n", file_name);
+	run_ui(&s);
 	return (0);
 }
 

@@ -21,7 +21,7 @@ SRCS_DIR    = ./src
 OBJS_DIR    = ./obj
 HEADERS_DIR = ./include
 
-SRCS        = main.c parser.c utils.c parsing_utils.c
+SRCS        = main.c parser.c utils.c parsing_utils.c sdl_init.c
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -42,7 +42,7 @@ LIBRARIES  += ./frameworks/SDL2.framework/SDL2
 
 TO_LINKING  = $(addprefix $(OBJS_DIR)/, $(OBJS)) $(INCLUDES) $(LIBRARIES)
 
-VPATH       = $(SRCS_DIR) $(OBJS_DIR)
+VPATH       = $(SRCS_DIR) $(OBJS_DIR) ./frameworks
 
 
 all         : $(NAME)

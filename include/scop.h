@@ -15,7 +15,8 @@
 # define SCOP_H
 
 #include <stdio.h>
-
+# include "SDL.h"
+# include "SDL_opengl.h"
 #include "../libft/libft.h"
 
 # define MES1 "Usage : ./scop [obj file] [texture]"
@@ -24,6 +25,16 @@
 # define MES4 "Memory allocation failure"
 # define MES5 "Invalid scene file"
 
+typedef struct		s_sdl
+{
+	SDL_Window		*win;
+	int 			win_w;
+	int 			win_h;
+	u_int			*pixels;
+	SDL_Renderer*	renderer;
+	SDL_Surface*	surf;
+	SDL_Texture*	canvas;
+}					t_sdl;
 
 typedef struct		s_scop
 {
@@ -56,5 +67,7 @@ void init_error_messages(void);
 void ft_error(char *s);
 int count_lines(char *file_name, t_scop *scop);
 int get_data(char *file_name, t_scop *scop);
+int 			sdl_init_everything(t_sdl *s);
+void	run_ui(t_sdl *s);
 
 #endif
