@@ -36,11 +36,27 @@ typedef struct		s_sdl
 	SDL_Texture*	canvas;
 }					t_sdl;
 
+typedef struct		s_vertex
+{
+	float 			vertex[3];
+	float 			normals[3];
+	float 			texture_coords[3];
+}					t_vertex;
+
+typedef struct		s_indices
+{
+	int 			index;
+	float 			normals[3];
+	float 			texture_coords[3];
+} 					t_indices;
+
 typedef struct		s_scop
 {
 	int				vertices_amount;
 	int				faces_amount;
 	int 			lines;
+	struct s_vertex *vertices;
+	struct s_indices *indices;
 	char			*str;
 	int				width;
 	int				heigh;

@@ -1,6 +1,42 @@
 
 #include "../include/scop.h"
 
+float ft_atof(const char* s)
+{
+  float rez = 0, fact = 1;
+  if (*s == '-'){
+    s++;
+    fact = -1;
+  };
+  for (int point_seen = 0; *s; s++)
+  {
+    if (*s == '.')
+	{
+      point_seen = 1; 
+      continue;
+    };
+    int d = *s - '0';
+    if (d >= 0 && d <= 9)
+	{
+      if (point_seen) fact /= 10.0f;
+      rez = rez * 10.0f + (float)d;
+    };
+  };
+  return rez * fact;
+};
+
+struct s_vertex get_vertex(char* s)
+{
+struct s_vertex vertex;
+float first = ft_atof(s);
+char *next =  ft_strchr(s, ' ');
+if (next)
+	vertex.vertex[1] = ft_atof(next);
+printf("fir = %f\n", first);
+vertex.vertex[0] = first;
+return (vertex);
+}
+
 int count_lines(char *file_name, t_scop *scop)
 {
 	int fd;
@@ -31,23 +67,20 @@ int count_lines(char *file_name, t_scop *scop)
 	return (0);
 }
 
-int get_data(char *file_name, t_scop *scop)
+int         get_data(char *file_name, t_scop *scop)
 {
-	int fd;
+	int     fd;
 	char	*line;
 	int		ret;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		ft_error(MES2);
-
-	scop->vertices_amount = 0;
-	scop->faces_amount = 0;
-	scop->lines = 0;
+	int i = 0;
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (line[0] == 'v')
-			(scop->vertices_amount)++;
+			scop->vertices[i] = get_vertex(++line);
 		else if (line[0] == 'f')
 			(scop->faces_amount)++;
 		(scop->lines)++;
