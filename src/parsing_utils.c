@@ -48,33 +48,42 @@ return (vertex);
 
 void 			get_indices(char* s, t_scop *scop, int *i)
 {
-	scop->indices[*i].index = ft_atoi(s) - 1;
-	++(*i);
+	scop->indices[++(*i)].index = ft_atoi(s) - 1;
+	printf("\n--------------\nindex[%i]  = %i\n", *i, scop->indices[*i].index);
 	while (*s && (*s == ' ' || *s == '\t'))
 		s++;
 	char *next = ft_strchr(s, ' ');
 	if (next)
-		scop->indices[*i].index = ft_atoi(next) - 1;
+		scop->indices[++(*i)].index = ft_atoi(next) - 1;
+	else
+		return;
+	printf("index[%i]  = %i\n", *i, scop->indices[*i].index);
 	++(*i);
 	while (*next == ' ' || *next == '\t')
 	next++;
 	next = ft_strchr(next, ' ');
 	if (next)
+	{
 		scop->indices[*i].index = ft_atoi(next) - 1;
-	printf("index  = %i    %i   %i\n", scop->indices[*i - 2].index, scop->indices[*i - 1].index, scop->indices[*i].index);
+		printf("index[%i]  = %i  \n", *i, scop->indices[*i].index);
+		++(*i);
+	}
+	else
+		return;
 	next++;
 	next = ft_strchr(next, ' ');
-	//printf("next  = %s  \n", next);
-	
-	
 	if (next)
 	{
+		scop->indices[*i].index = scop->indices[*i - 3].index;
+		printf("\n++++++++++++++\nindex[%i]  = %i\n", *i,scop->indices[*i].index);
 		++(*i);
-		scop->indices[*i].index = ft_atoi(next);
-	printf("index4  = %i  \n", scop->indices[*i].index);
+		scop->indices[*i].index = scop->indices[*i - 2].index;
+		printf("index[%i]  = %i\n",*i, scop->indices[*i].index);
+		++(*i);
+		scop->indices[*i].index = ft_atoi(next) - 1;
+		printf("index[%i]  = %i\n",*i, scop->indices[*i].index);
 	
 	}
-	//++(*i);
 }
 
 int         get_data(char *file_name, t_scop *scop)

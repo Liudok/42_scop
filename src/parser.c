@@ -61,7 +61,7 @@ int obj_parser(char *file_name, t_scop *scop)
 
 	//printf("PROVERKA %s\n", file_name);
 
-	fill_buffers(&scop, &s);
+	//fill_buffers(scop, &s);
 	run_ui(&s);
 	return (0);
 }
