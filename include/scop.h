@@ -85,5 +85,6 @@ int count_lines(char *file_name, t_scop *scop);
 int get_data(char *file_name, t_scop *scop);
 int 			sdl_init_everything(t_sdl *s);
 void	run_ui(t_sdl *s);
+void 	fill_buffers(t_scop *scop, t_sdl *s);
 
 #endif
